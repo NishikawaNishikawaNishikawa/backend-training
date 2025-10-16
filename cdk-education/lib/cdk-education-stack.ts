@@ -16,8 +16,12 @@ export class CdkEducationStack extends Stack {
   ) {
     super(scope, id, props);
 
-    const ecrBackend = new Ecr(this, "EcrBackend", "backend");
-    const ecrFrontend = new Ecr(this, "EcrFrontEnd", "frontend");
+    const ecrBackend = new Ecr(this, "EcrBackend", "backend-HirotoNishikawa");
+    const ecrFrontend = new Ecr(
+      this,
+      "EcrFrontEnd",
+      "frontend-HirotoNishikawa"
+    );
 
     const vpc = new Vpc(this, "Vpc");
 
@@ -64,10 +68,10 @@ export class CdkEducationStack extends Stack {
       port: 8080,
       protocol: ApplicationProtocol.HTTP,
       open: true,
-  });
+    });
 
-  backendListener.addTargets("EcsBackendTargets", {
-      port: 5000,               // ECS タスク側のポート
+    backendListener.addTargets("EcsBackendTargets", {
+      port: 5000, // ECS タスク側のポート
       protocol: ApplicationProtocol.HTTP,
       targets: [ecsBackend.loadBalancerTarget],
       healthCheck: {

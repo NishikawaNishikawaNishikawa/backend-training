@@ -1,12 +1,13 @@
-import cors from 'cors';
-import express from 'express';
-import dotenv from 'dotenv';
-import userRoutes from './routes/userRoutes';
-import postRoutes from './routes/postRoutes'; 
-import { initDb } from './db/index';
-import { healthCheck } from './controllers/healthController';
+import cors from "cors";
+import express from "express";
+import dotenv from "dotenv";
+import userRoutes from "./routes/userRoutes";
+import postRoutes from "./routes/postRoutes";
+import commentRoutes from "./routes/commentRoutes";
+import { initDb } from "./db/index";
+import { healthCheck } from "./controllers/healthController";
 
-dotenv.config({ path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env' });
+dotenv.config({ path: process.env.NODE_ENV === "test" ? ".env.test" : ".env" });
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,16 +18,17 @@ app.use(cors());
 // JSONパーサー
 app.use(express.json());
 
-app.get('/', (_req, res) => {
-  res.send('Hello, World!');
+app.get("/", (_req, res) => {
+  res.send("Hello, World!");
 });
 
 // ヘルスチェックエンドポイント
-app.get('/health', healthCheck);
+app.get("/health", healthCheck);
 
 // ルートの設定
-app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 
 // サーバー起動とインスタンス取得
 const server = app.listen(port, () => {
