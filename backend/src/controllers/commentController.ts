@@ -26,13 +26,14 @@ export const createComment = async (req: Request, res: Response) => {
 
   try {
     const [result] = await db.query<ResultSetHeader>(
-      "INSERT INTO posts (post_id, user_id, title, content, createdAt) VALUES (?, ?, ?, ?, ?)",
+      "INSERT INTO comments (post_id, user_id, content, created_At) VALUES (?, ?, ?, ?)",
       [postId, userId, content, createdAt]
     );
     res
       .status(201)
       .json({ id: result.insertId, postId, userId, content, createdAt });
   } catch (error) {
+    console.error("Error creating comment:", error);
     res.status(500).json({ error: "Error creating post" });
   }
 };

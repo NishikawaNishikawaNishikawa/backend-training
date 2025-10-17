@@ -12,12 +12,31 @@ export const getPosts = async () => {
   return response.data;
 };
 
-export const addPost = async (postData: { userId: number; title: string; content: string }) => {
+export const addPost = async (postData: {
+  userId: number;
+  title: string;
+  content: string;
+}) => {
   const response = await axios.post(`${API_URL}/posts`, postData);
   return response.data;
 };
 
 export const deleteUser = async (id: number) => {
   const response = await axios.delete(`${API_URL}/users/${id}`);
+  return response.data;
+};
+
+export const getComments = async () => {
+  const response = await axios.get(`${API_URL}/comments`);
+  return response.data;
+};
+
+export const addComment = async (commentData: {
+  postId: number;
+  userId: number;
+  content: string;
+  createdAt: string;
+}) => {
+  const response = await axios.post(`${API_URL}/comments`, commentData);
   return response.data;
 };
