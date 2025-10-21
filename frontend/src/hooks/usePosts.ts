@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getPosts, addPost } from '../services/api';
+import { useState, useEffect } from "react";
+import { getPosts, addPost } from "../services/api";
 
 type Post = {
   id: number;
@@ -16,22 +16,26 @@ export const usePosts = () => {
       const data = await getPosts();
       setPosts(data);
     } catch (error) {
-      console.error('Failed to fetch Posts:', error);
+      console.error("Failed to fetch Posts:", error);
     }
   };
 
-  const handleAddPost = async (postData: { userId: number; title: string; content: string }) => {
-    if (!postData.userId || !postData.title || !postData.content) {
-      console.error('All fields are required.');
+  const handleAddPost = async (post: {
+    userId: number;
+    title: string;
+    content: string;
+  }) => {
+    if (!post.userId || !post.title || !post.content) {
+      console.error("All fields are required.");
       return;
     }
 
     try {
-      await addPost(postData);
+      await addPost(post);
       // 投稿後に再取得
       await fetchPosts();
     } catch (error) {
-      console.error('Failed to add Post:', error);
+      console.error("Failed to add Post:", error);
     }
   };
 

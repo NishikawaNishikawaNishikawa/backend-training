@@ -19,7 +19,7 @@ const CommentList: FC<{
   comments: Comment[];
 }> = ({ users, postId, comments }) => {
   const filteredComments = comments.filter(
-    (comment) => Number(comment.post_id) === Number(postId)
+    (comment) => comment.post_id === postId
   );
 
   return (

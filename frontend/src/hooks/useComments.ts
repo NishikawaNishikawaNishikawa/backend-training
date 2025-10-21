@@ -21,19 +21,18 @@ export const useComments = () => {
     }
   };
 
-  const handleAddComment = async (CommentData: {
+  const handleAddComment = async (comment: {
     postId: number;
     userId: number;
     content: string;
-    createdAt: string;
   }) => {
-    if (!CommentData.userId || !CommentData.content) {
+    if (!comment.userId || !comment.content) {
       console.error("All fields are required.");
       return;
     }
 
     try {
-      await addComment(CommentData);
+      await addComment(comment);
       // 投稿後に再取得
       await fetchComments();
     } catch (error) {
