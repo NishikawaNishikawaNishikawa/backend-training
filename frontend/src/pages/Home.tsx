@@ -7,7 +7,7 @@ import { usePosts } from "../hooks/usePosts";
 
 const Home: FC = () => {
   const { users, deleteUser, loading } = useUsers();
-  const { posts, addPost, fetchPosts } = usePosts();
+  const { posts, addPost, fetchPosts, updatePost } = usePosts();
 
   const handleDeleteUser = async (id: number) => {
     await deleteUser(id);
@@ -18,7 +18,7 @@ const Home: FC = () => {
     <div>
       <h1>Welcome to the Dashboard</h1>
       <UserList users={users} deleteUser={handleDeleteUser} loading={loading} />
-      <PostList users={users} posts={posts} />
+      <PostList users={users} posts={posts} updatePost={updatePost} />
       <PostForm users={users} onPostAdded={addPost} />
     </div>
   );
