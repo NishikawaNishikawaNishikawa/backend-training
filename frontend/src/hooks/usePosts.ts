@@ -24,18 +24,18 @@ export const usePosts = () => {
     }
   };
 
-  const handleAddPost = async (postData: {
+  const handleAddPost = async (post: {
     userId: number;
     title: string;
     content: string;
   }) => {
-    if (!postData.userId || !postData.title || !postData.content) {
+    if (!post.userId || !post.title || !post.content) {
       console.error("All fields are required.");
       return;
     }
 
     try {
-      await addPost(postData);
+      await addPost(post);
       // 投稿後に再取得
       await fetchPosts();
     } catch (error) {

@@ -8,11 +8,10 @@ interface User {
 interface CommentFormProps {
   inpPostId: number;
   users: User[];
-  onCommentAdded: (commentData: {
+  onCommentAdded: (comment: {
     postId: number;
     userId: number;
     content: string;
-    createdAt: string;
   }) => Promise<void>;
 }
 
@@ -30,9 +29,6 @@ const CommentForm: FC<CommentFormProps> = ({
     }
   }, [users]);
 
-  const postId = inpPostId;
-  const createdAt = new Date().toLocaleDateString();
-
   const [content, setContent] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
@@ -42,7 +38,7 @@ const CommentForm: FC<CommentFormProps> = ({
       return;
     }
 
-    onCommentAdded({ postId, userId: Number(userId), content, createdAt });
+    onCommentAdded({ postId: inpPostId, userId: Number(userId), content });
     setContent("");
   };
 

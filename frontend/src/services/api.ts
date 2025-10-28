@@ -12,12 +12,12 @@ export const getPosts = async () => {
   return response.data;
 };
 
-export const addPost = async (postData: {
+export const addPost = async (post: {
   userId: number;
   title: string;
   content: string;
 }) => {
-  const response = await axios.post(`${API_URL}/posts`, postData);
+  const response = await axios.post(`${API_URL}/posts`, post);
   return response.data;
 };
 
@@ -31,13 +31,12 @@ export const getComments = async () => {
   return response.data;
 };
 
-export const addComment = async (commentData: {
+export const addComment = async (comment: {
   postId: number;
   userId: number;
   content: string;
-  createdAt: string;
 }) => {
-  const response = await axios.post(`${API_URL}/comments`, commentData);
+  const response = await axios.post(`${API_URL}/comments`, comment);
   return response.data;
 };
 
