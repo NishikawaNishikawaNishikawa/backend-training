@@ -39,3 +39,12 @@ export const addComment = async (comment: {
   const response = await axios.post(`${API_URL}/comments`, comment);
   return response.data;
 };
+
+export const updatePost = async (impPost: {
+  id: number;
+  title: string;
+  content: string;
+}) => {
+  const response = await axios.put(`${API_URL}/posts/${impPost.id}`, impPost);
+  return response.data;
+};

@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { getPosts, addPost } from "../services/api";
+import {
+  getPosts,
+  addPost,
+  updatePost as updatePostapi,
+} from "../services/api";
 
 type Post = {
   id: number;
@@ -39,9 +43,22 @@ export const usePosts = () => {
     }
   };
 
+  const updatePost = async (impPost: {
+    id: number;
+    title: string;
+    content: string;
+  }) => {
+    try {
+      await updatePostapi(impPost);
+      await fetchPosts();
+    } catch (error) {
+      console.error("Failed to update comment:", error);
+    }
+  };
+
   useEffect(() => {
     fetchPosts();
   }, []);
 
-  return { posts, addPost: handleAddPost, fetchPosts };
+  return { posts, addPost: handleAddPost, fetchPosts, updatePost };
 };
