@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, useState } from 'react';
+import { FC, FormEvent, useEffect, useState } from "react";
 
 interface User {
   id: number;
@@ -7,11 +7,15 @@ interface User {
 
 interface PostFormProps {
   users: User[];
-  onPostAdded: (postData: { userId: number; title: string; content: string }) => Promise<void>;
+  onPostAdded: (post: {
+    userId: number;
+    title: string;
+    content: string;
+  }) => Promise<void>;
 }
 
 const PostForm: FC<PostFormProps> = ({ users, onPostAdded }) => {
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState("");
 
   // users が更新されたときに userId を設定
   useEffect(() => {
@@ -20,8 +24,8 @@ const PostForm: FC<PostFormProps> = ({ users, onPostAdded }) => {
     }
   }, [users]);
 
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -31,14 +35,17 @@ const PostForm: FC<PostFormProps> = ({ users, onPostAdded }) => {
     }
 
     onPostAdded({ userId: Number(userId), title, content });
-    setTitle('');
-    setContent('');
+    setTitle("");
+    setContent("");
   };
 
   return (
     <>
       {users.length > 0 ? (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+        >
           <label>
             User:
             <select value={userId} onChange={(e) => setUserId(e.target.value)}>

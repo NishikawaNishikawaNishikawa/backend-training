@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import UserList from '../components/UserList';
-import PostList from '../components/PostList';
-import PostForm from '../components/PostForm';
-import { useUsers } from '../hooks/useUsers';
-import { usePosts } from '../hooks/usePosts';
+import { FC } from "react";
+import UserList from "../components/UserList";
+import PostList from "../components/PostList";
+import PostForm from "../components/PostForm";
+import { useUsers } from "../hooks/useUsers";
+import { usePosts } from "../hooks/usePosts";
 
 const Home: FC = () => {
   const { users, deleteUser, loading } = useUsers();
@@ -18,7 +18,7 @@ const Home: FC = () => {
     <div>
       <h1>Welcome to the Dashboard</h1>
       <UserList users={users} deleteUser={handleDeleteUser} loading={loading} />
-      <PostList posts={posts} />
+      <PostList users={users} posts={posts} />
       <PostForm users={users} onPostAdded={addPost} />
     </div>
   );
